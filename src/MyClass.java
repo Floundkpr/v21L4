@@ -1,3 +1,5 @@
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 class MyClass {
@@ -75,5 +77,41 @@ class MyClass {
                 "разбивая на строки так, чтобы каждая строка оканчивалась точкой либо содержала ровно 60 литер, " +
                 "если среди них нет точки.");
 
+        StringBuilder s = new StringBuilder();
+        try(FileReader reader = new FileReader("./Book/Book.txt"))
+            {
+                int c;
+                while((c = reader.read())!= -1){
+                    if (c != 13 && c != 10)
+                        s.append((char)c);
+                }
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        try(FileWriter writer = new FileWriter("./Book/Book.txt", false))
+        {
+            int k = 1;
+            for (int i = 0; i < s.length(); i++) {
+                if (s.toString().charAt(i) == '.') {
+                    writer.append(s.toString().charAt(i)).append('\n');
+                    k = 0;
+                }
+                else if (k == 60) {
+                    writer.append('\n');
+                    k = 0;
+                }
+                else  {
+                    writer.append(s.toString().charAt(i));
+                    k++;
+                }
+            }
+            writer.flush();
+        }
+        catch(Exception ex){
+
+            System.out.println(ex.getMessage());
+        }
     }
 }
