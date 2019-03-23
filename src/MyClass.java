@@ -1,13 +1,18 @@
 import java.util.Scanner;
 
 class MyClass {
-    private static Scanner scanner = new Scanner(System.in); //Экземпляр класса Scanner для ввода значений
+    private static Scanner scanner = new Scanner(System.in);
 
     static void a1(){
         System.out.println("Даны две строки: S1 и S2. " +
                 "Удалить из строки S1 все подстроки, совпадающие с S2. " +
                 "Если таких подстрок нет, то вывести S1 без изменений.");
-
+        System.out.println("Введите первую строку");
+        String s1 = scanner.nextLine();
+        System.out.println("Введите вторую строку");
+        String s2 = scanner.nextLine();
+        s1 = s1.replace(s2,"");
+        System.out.println(s1);
     }
 
 
@@ -15,21 +20,52 @@ class MyClass {
         System.out.println("Дан текст из слов, разделенных пробелами. " +
                 "Вывести на экран все слова, совпадающие с последним словом фразы. " +
                 "Если таких слов нет, выдать соответствующее сообщение.");
-
+        System.out.println("Введите текст");
+        String s = scanner.nextLine() + " ";
+        String[] arr = s.split(" ");
+        boolean f = false;
+        for (int i = 0; i < arr.length - 1; i++){
+            if (arr[i].equals(arr[arr.length - 1])){
+                f = true;
+                System.out.print(arr[i] + " ");
+            }
+        }
+        if (!f) System.out.println("В тексте нет слов, совпадающих с последним словом фразы");
+        System.out.println();
     }
 
 
     static void b2(){
         System.out.println("После каждого слова текста, заканчивающегося " +
                 "заданной подстрокой, вставить указанное слово.");
-
+        System.out.println("Введите текст");
+        String s = scanner.nextLine() + " ";
+        String[] arr = s.trim().split(" ");
+        System.out.println("Введите подстроку, на которую должно заканчиваться слово");
+        String sub = scanner.nextLine();
+        System.out.println("Введите слово, которое необходимо вставить");
+        String word = scanner.nextLine();
+        for (int i = 0; i < arr.length - 1; i++){
+            if (arr[i].trim().contains(sub)) arr[i] = arr[i].replace(arr[i], arr[i] + " " + word);
+        }
+        s = String.join(" ", arr);
+        System.out.println(s);
     }
 
 
     static void b3() {
         System.out.println("В тексте исключить подстроку максимальной длины, " +
                 "начинающуюся и заканчивающуюся заданными символами.");
-
+        System.out.println("Введите текст");
+        String s = scanner.nextLine();
+        System.out.println("Введите символ начала подстроки");
+        char c1 = scanner.nextLine().charAt(0);
+        System.out.println("Введите символ конца подстроки");
+        char c2 = scanner.nextLine().charAt(0);
+        int k = s.indexOf(c1) - s.lastIndexOf(c2);
+        if (s.contains(Character.toString(c1)) && s.contains(Character.toString(c2)) && k < 0)
+            s = s.replace(s.substring(s.indexOf(c1), s.lastIndexOf(c2) + 1), "");
+        System.out.println(s);
     }
 
 
