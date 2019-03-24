@@ -47,7 +47,7 @@ class MyClass {
         String sub = scanner.nextLine();
         System.out.println("Введите слово, которое необходимо вставить");
         String word = scanner.nextLine();
-        for (int i = 0; i < arr.length - 1; i++){
+        for (int i = 0; i < arr.length; i++){
             if (arr[i].trim().contains(sub)) arr[i] = arr[i].replace(arr[i], arr[i] + " " + word);
         }
         s = String.join(" ", arr);
